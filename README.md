@@ -22,15 +22,15 @@ Oven consists two mapping tools:
 
 # AnnotationDrivenMapper
 Simple mapping can be resolved by using annotations. `AnnotationDrivenMapper` can be really useful when you have to map classes with a lot of common fields. Please take a few minutes to get familiar with the following annotations:    
-- [@MappableTo](oven#mappableto)
-- [@Map](oven#map)
-  - [@Map(to=...) parameter](oven#mapto-parameter-optional)
-  - [@Map(fromNested=...) parameter](oven#mapto-parameter-optional)
-  - [@Map(of=...) parameter](oven#mapping-one-class-to-multiple)
-  - [@Map(elementsAs=...) parameter](oven#mapelementsas-parameter-optional)
-  - [@Map(keysAs=...) and @Map(valuesAs=...) parameters](oven#mapkeysas-valuesas-parameter-optional)
-- [@Mappings](oven#mappings)
-- [Writing custom annotations](oven#extending-annotationdrivenmapper-functionality)
+- [@MappableTo](#mappableto)
+- [@Map](#map)
+  - [@Map(to=...) parameter](#mapto-parameter-optional)
+  - [@Map(fromNested=...) parameter](#mapto-parameter-optional)
+  - [@Map(of=...) parameter](#mapping-one-class-to-multiple)
+  - [@Map(elementsAs=...) parameter](#mapelementsas-parameter-optional)
+  - [@Map(keysAs=...) and @Map(valuesAs=...) parameters](#mapkeysas-valuesas-parameter-optional)
+- [@Mappings](#mappings)
+- [Writing custom annotations](#extending-annotationdrivenmapper-functionality)
 
 ***AnnotationDrivenMapper uses [TypeConverter](https://github.com/jsolve/sweetener/wiki/Type-converter) to convert fields to different types. Make sure you familiarize yourself with [supported conversions](https://github.com/jsolve/sweetener/wiki/Type-converter#supported-conversions) list.***
 ##  @MappableTo
@@ -378,7 +378,7 @@ HeroDTO heroDTO = AnnotationDrivenMapper.map(hero, HeroDTO.class);
 ```
 
 ## Extending AnnotationDrivenMapper functionality
-We understand that you can have needs that our [annotations](Oven#annotationdrivenmapper) will not satisfy so we have left an open window for you. You can easily introduce your own annotation that `AnnotationDrivenMapper` will understand. To do so you only need to create a new class implementing `AnnotationMapping` and register that class using `AnnotationDrivenMapper.registerAnnotationMapping(annotationMapping)` - all annotation mappings [introduced](Oven#annotationdrivenmapper) are implementing `AnnotationMapping` and are registered in the same way. 
+We understand that you can have needs that our [annotations](#annotationdrivenmapper) will not satisfy so we have left an open window for you. You can easily introduce your own annotation that `AnnotationDrivenMapper` will understand. To do so you only need to create a new class implementing `AnnotationMapping` and register that class using `AnnotationDrivenMapper.registerAnnotationMapping(annotationMapping)` - all annotation mappings [introduced](#annotationdrivenmapper) are implementing `AnnotationMapping` and are registered in the same way. 
 ### Example
 Suppose we have a `Student` class with field `semester` (string):
 ``` java
@@ -456,4 +456,4 @@ HeroSnapshot heroSnapshot = heroToHeroSnapshotMapper.map(hero);
 ```
 `heroToHeroSnapshotMapper.map(hero)` will return `HeroSnapshot` object with name 'Steve Rogers'. If `Hero` class was also annotated for mapping - those annotated fields would also be set.
 # ComplexMapper and AnnotationDrivenMapper working together
-It is also possible to use `AnnotationDrivenMapper` for simple field to field mapping and `ComplexMapper` for the rest of the cases. Just annotate your class with `AnnotationDrivenMapper`'s [annotations](Oven#annotationdrivenmapper) and create ComplexMapper similar to `heroToHeroSnapshotMapper` above. Keep in mind that `ComplexMapper` has higher priority and fields set in `MappingStrategy` will be decisive.
+It is also possible to use `AnnotationDrivenMapper` for simple field to field mapping and `ComplexMapper` for the rest of the cases. Just annotate your class with `AnnotationDrivenMapper`'s [annotations](#annotationdrivenmapper) and create ComplexMapper similar to `heroToHeroSnapshotMapper` above. Keep in mind that `ComplexMapper` has higher priority and fields set in `MappingStrategy` will be decisive.
