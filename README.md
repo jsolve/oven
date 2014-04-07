@@ -54,7 +54,7 @@ Parameters (all are optional):
  - `to` - the name of the target class' field. If not specified the source class' field name will be taken.
  - `of` - target class that this annotation applies. If not specified all classes specified in `@MappableTo` annotation will be taken.
  - `fromNested` - use when the value of source class' field is nested. Use dot character for each nest. 
- - `elementsAs` - use when working with generic collections, i.e. List<String>, List<Integer>, etc. 
+ - `elementsAs` - use when working with generic collections, i.e. `List<String>`, `List<Integer>`, etc. 
  - `keysAs`, `valuesAs` - use when working with java.util.Map
 
 Annotated fields via `@Map` will be copied to specified target class' fields. All of the parameters are well described with examples below.
