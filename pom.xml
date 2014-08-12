@@ -31,10 +31,12 @@
 
 	<properties>
 		<project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
-		<java.version>1.7</java.version>
+		<java.version>1.6</java.version>
 		<maven-compiler-plugin.version>3.0</maven-compiler-plugin.version>
 		<maven-jar-plugin.version>2.4</maven-jar-plugin.version>
 		<wagon-ftp.version>2.4</wagon-ftp.version>
+		<typeconverter.version>1.0.0-SNAPSHOT</typeconverter.version>
+		<sweetener.version>1.0.0-SNAPSHOT</sweetener.version>
 
 		<jackson-mapper-asl.version>1.9.12</jackson-mapper-asl.version>
 		<fest-assert.version>1.4</fest-assert.version>
@@ -54,21 +56,14 @@
 		<dependency>
 			<groupId>pl.jsolve</groupId>
 			<artifactId>typeconverter</artifactId>
-			<version>1.0.0-SNAPSHOT</version>
+			<version>${typeconverter.version}</version>
 		</dependency>
 		<dependency>
 			<groupId>pl.jsolve</groupId>
 			<artifactId>sweetener</artifactId>
-			<version>1.0.0-SNAPSHOT</version>
+			<version>${sweetener.version}</version>
 		</dependency>
 		<!-- For testing -->
-		<dependency>
-			<groupId>pl.jsolve</groupId>
-			<artifactId>sweetener</artifactId>
-			<version>1.0.0-SNAPSHOT</version>
-			<type>test-jar</type>
-			<scope>test</scope>
-		</dependency>
 		<dependency>
 			<groupId>org.easytesting</groupId>
 			<artifactId>fest-assert</artifactId>

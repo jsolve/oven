@@ -1,14 +1,13 @@
 package pl.jsolve.oven;
 
-import static org.fest.assertions.Assertions.assertThat;
-import static pl.jsolve.oven.stub.hero.HeroProfiledBuilder.aCaptainAmerica;
-
 import org.junit.Test;
-
 import pl.jsolve.oven.complex.ComplexMapper;
 import pl.jsolve.oven.complex.MappingStrategy;
 import pl.jsolve.oven.stub.hero.Hero;
 import pl.jsolve.oven.stub.hero.HeroSnapshot;
+
+import static org.fest.assertions.Assertions.assertThat;
+import static pl.jsolve.oven.stub.hero.HeroProfiledBuilder.aCaptainAmerica;
 
 public class ComplexMapperTest {
 
@@ -20,7 +19,7 @@ public class ComplexMapperTest {
 	public void shouldMapHeroToHeroSnapshot() {
 		// given
 		Hero captainAmerica = aCaptainAmerica().withId(ID).build();
-		ComplexMapper<Hero, HeroSnapshot> heroToHeroSnapshotMapper = new ComplexMapper<>(new MappingStrategy<Hero, HeroSnapshot>() {
+		ComplexMapper<Hero, HeroSnapshot> heroToHeroSnapshotMapper = new ComplexMapper<Hero, HeroSnapshot>(new MappingStrategy<Hero, HeroSnapshot>() {
 
 			@Override
 			public HeroSnapshot map(Hero source, HeroSnapshot target) {
@@ -41,7 +40,7 @@ public class ComplexMapperTest {
 	public void shouldMapHeroToHeroSnapshotWithComplexIdMapping() {
 		// given
 		Hero captainAmerica = aCaptainAmerica().withId(ID).build();
-		ComplexMapper<Hero, HeroSnapshot> heroToHeroSnapshotMapper = new ComplexMapper<>(new MappingStrategy<Hero, HeroSnapshot>() {
+		ComplexMapper<Hero, HeroSnapshot> heroToHeroSnapshotMapper = new ComplexMapper<Hero, HeroSnapshot>(new MappingStrategy<Hero, HeroSnapshot>() {
 			@Override
 			public HeroSnapshot map(Hero source, HeroSnapshot target) {
 				target.setId(source.getId() + ANY_NUMBER);
@@ -61,7 +60,7 @@ public class ComplexMapperTest {
 		HeroSnapshot heroSnapshot = new HeroSnapshot();
 		heroSnapshot.setId(ID);
 		heroSnapshot.setName("Johann Schmidt");
-		ComplexMapper<HeroSnapshot, Hero> heroSnapshotToHeroMapper = new ComplexMapper<>(new MappingStrategy<HeroSnapshot, Hero>() {
+		ComplexMapper<HeroSnapshot, Hero> heroSnapshotToHeroMapper = new ComplexMapper<HeroSnapshot, Hero>(new MappingStrategy<HeroSnapshot, Hero>() {
 
 			@Override
 			public Hero map(HeroSnapshot source, Hero target) {

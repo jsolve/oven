@@ -1,7 +1,5 @@
 package pl.jsolve.oven.builder;
 
-import java.util.List;
-
 import pl.jsolve.oven.builder.strategies.AnnotationDrivenMapperStrategy;
 import pl.jsolve.oven.builder.strategies.ArrayElementsMapperStrategy;
 import pl.jsolve.oven.builder.strategies.CollectionElementsMapperStrategy;
@@ -9,6 +7,8 @@ import pl.jsolve.oven.builder.strategies.MapKeysAndValuesMapperStrategy;
 import pl.jsolve.oven.builder.strategies.MapperBuilderStrategy;
 import pl.jsolve.oven.builder.strategies.TypeConverterStrategy;
 import pl.jsolve.sweetener.collection.Collections;
+
+import java.util.List;
 
 public class MapperBuilder<T> {
 
@@ -20,7 +20,7 @@ public class MapperBuilder<T> {
 	}
 
 	public static <T> MapperBuilder<T> toType(Class<T> targetType) {
-		return new MapperBuilder<>(targetType);
+		return new MapperBuilder<T>(targetType);
 	}
 
 	public MapperBuilder<T> usingAnnotations() {

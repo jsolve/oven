@@ -16,6 +16,7 @@ public class ComplexMapper<S, T> {
 		return mappingStrategy.map(source, target);
 	}
 
+	@SuppressWarnings("unchecked")
 	private Class<T> getMapMethodReturnType() {
 		return (Class<T>) Reflections.getMethods(mappingStrategy).get(0).getReturnType();
 	}
