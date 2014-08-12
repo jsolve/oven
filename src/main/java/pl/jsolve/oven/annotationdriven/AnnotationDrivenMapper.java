@@ -1,14 +1,14 @@
 package pl.jsolve.oven.annotationdriven;
 
-import static java.util.Collections.synchronizedList;
+import pl.jsolve.oven.annotationdriven.annotation.MappableTo;
+import pl.jsolve.oven.annotationdriven.exception.MappingException;
+import pl.jsolve.sweetener.core.Reflections;
 
 import java.util.Arrays;
 import java.util.LinkedList;
 import java.util.List;
 
-import pl.jsolve.oven.annotationdriven.annotation.MappableTo;
-import pl.jsolve.oven.annotationdriven.exception.MappingException;
-import pl.jsolve.sweetener.core.Reflections;
+import static java.util.Collections.synchronizedList;
 
 public final class AnnotationDrivenMapper {
 

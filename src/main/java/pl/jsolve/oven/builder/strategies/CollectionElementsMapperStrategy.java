@@ -1,9 +1,9 @@
 package pl.jsolve.oven.builder.strategies;
 
+import pl.jsolve.oven.builder.MapperBuilder;
+
 import java.lang.reflect.Array;
 import java.util.Collection;
-
-import pl.jsolve.oven.builder.MapperBuilder;
 
 public class CollectionElementsMapperStrategy implements MapperBuilderStrategy {
 

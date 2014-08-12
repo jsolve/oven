@@ -1,14 +1,14 @@
 package pl.jsolve.oven.annotationdriven;
 
-import java.lang.reflect.Field;
-import java.util.List;
-
 import pl.jsolve.oven.annotationdriven.annotation.Map;
 import pl.jsolve.oven.annotationdriven.annotation.Mappings;
 import pl.jsolve.oven.annotationdriven.exception.MappingException;
 import pl.jsolve.oven.builder.MapperBuilder;
 import pl.jsolve.sweetener.collection.Collections;
 import pl.jsolve.sweetener.core.Reflections;
+
+import java.lang.reflect.Field;
+import java.util.List;
 
 class MapAnnotationMapping implements AnnotationMapping {
 
@@ -19,7 +19,7 @@ class MapAnnotationMapping implements AnnotationMapping {
 	@Override
 	public <S, T> void apply(S sourceObject, T targetObject) {
 		applyOnFieldsAnnotatedByMap(sourceObject, targetObject);
-		applyOnFieldsAnnotatedByMappings(sourceObject, targetObject);
+//		applyOnFieldsAnnotatedByMappings(sourceObject, targetObject);
 	}
 
 	private <S, T> void applyOnFieldsAnnotatedByMap(S sourceObject, T targetObject) {
