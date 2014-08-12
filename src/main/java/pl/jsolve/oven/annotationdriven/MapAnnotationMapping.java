@@ -19,7 +19,7 @@ class MapAnnotationMapping implements AnnotationMapping {
 	@Override
 	public <S, T> void apply(S sourceObject, T targetObject) {
 		applyOnFieldsAnnotatedByMap(sourceObject, targetObject);
-//		applyOnFieldsAnnotatedByMappings(sourceObject, targetObject);
+		applyOnFieldsAnnotatedByMappings(sourceObject, targetObject);
 	}
 
 	private <S, T> void applyOnFieldsAnnotatedByMap(S sourceObject, T targetObject) {
