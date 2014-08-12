@@ -1,5 +1,26 @@
 package pl.jsolve.oven.simple;
 
+import org.junit.Test;
+import pl.jsolve.oven.annotationdriven.AnnotationDrivenMapper;
+import pl.jsolve.oven.annotationdriven.AnnotationMapping;
+import pl.jsolve.oven.annotationdriven.exception.MappingException;
+import pl.jsolve.oven.simple.stub.*;
+import pl.jsolve.oven.stub.hero.Hero;
+import pl.jsolve.oven.stub.hero.HeroBuilder;
+import pl.jsolve.oven.stub.hero.HeroDTO;
+import pl.jsolve.oven.stub.hero.HeroSnapshot;
+import pl.jsolve.oven.stub.person.Address;
+import pl.jsolve.oven.stub.person.City;
+import pl.jsolve.oven.stub.person.FieldOfStudy;
+import pl.jsolve.oven.stub.person.Person;
+import pl.jsolve.oven.stub.person.Student;
+import pl.jsolve.oven.stub.person.StudentDTO;
+import pl.jsolve.oven.stub.person.StudentSnapshot;
+import pl.jsolve.sweetener.core.Reflections;
+import pl.jsolve.sweetener.tests.catcher.ExceptionalOperation;
+
+import java.lang.reflect.Field;
+
 import static org.fest.assertions.Assertions.assertThat;
 import static pl.jsolve.oven.simple.stub.StudentWithBadlyAnnotatedFromNestedField.NOT_EXISTING_NESTED_FIELD;
 import static pl.jsolve.oven.simple.stub.StudentWithBadlyAnnotatedMapTo.NOT_EXISTING_FIELD;
@@ -9,37 +30,6 @@ import static pl.jsolve.sweetener.collection.Collections.newArrayList;
 import static pl.jsolve.sweetener.collection.Collections.newHashSet;
 import static pl.jsolve.sweetener.tests.assertion.ThrowableAssertions.assertThrowable;
 import static pl.jsolve.sweetener.tests.catcher.ExceptionCatcher.tryToCatch;
-
-import java.lang.reflect.Field;
-
-import org.junit.Test;
-
-import pl.jsolve.oven.annotationdriven.AnnotationDrivenMapper;
-import pl.jsolve.oven.annotationdriven.AnnotationMapping;
-import pl.jsolve.oven.annotationdriven.exception.MappingException;
-import pl.jsolve.oven.simple.stub.Grade;
-import pl.jsolve.oven.simple.stub.StudentWithArrays;
-import pl.jsolve.oven.simple.stub.StudentWithBadlyAnnotatedFromNestedField;
-import pl.jsolve.oven.simple.stub.StudentWithBadlyAnnotatedMapTo;
-import pl.jsolve.oven.simple.stub.StudentWithCollections;
-import pl.jsolve.oven.simple.stub.StudentWithGradeAsInteger;
-import pl.jsolve.oven.simple.stub.StudentWithGradeAsString;
-import pl.jsolve.oven.simple.stub.StudentWithMapParsingIntToAnnotationMapping;
-import pl.jsolve.oven.simple.stub.StudentWithMapableGrade;
-import pl.jsolve.oven.simple.stub.StudentWithMapableGradeSnapshot;
-import pl.jsolve.oven.stub.hero.Hero;
-import pl.jsolve.oven.stub.hero.HeroBuilder;
-import pl.jsolve.oven.stub.hero.HeroDTO;
-import pl.jsolve.oven.stub.hero.HeroSnapshot;
-import pl.jsolve.oven.stub.person.Address;
-import pl.jsolve.oven.stub.person.City;
-import pl.jsolve.oven.stub.person.FieldOfStudy;
-import pl.jsolve.oven.stub.person.Student;
-import pl.jsolve.oven.stub.person.StudentDTO;
-import pl.jsolve.oven.stub.person.StudentSnapshot;
-import pl.jsolve.sweetener.collection.data.Person;
-import pl.jsolve.sweetener.core.Reflections;
-import pl.jsolve.sweetener.tests.catcher.ExceptionalOperation;
 
 public class AnnotationDrivenMapperTest {
 
