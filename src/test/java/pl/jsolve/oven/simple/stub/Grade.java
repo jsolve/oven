@@ -8,10 +8,10 @@ public class Grade {
 
 	@Map
 	private int grade;
-
+/*
 	public Grade() {
 	}
-
+*/
 	public Grade(int grade) {
 		this.grade = grade;
 	}
