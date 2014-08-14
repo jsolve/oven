@@ -289,7 +289,7 @@ public class AnnotationDrivenMapperTest {
 	@Test
 	public void shouldMapStudentWithCollectionsToStudentWithArrays() {
 		// given
-		StudentWithCollections studentWithCollections = new StudentWithCollections();
+		StudentWithCollections studentWithCollections = new StudentWithCollections(null, null);
 		studentWithCollections.setGrades(newArrayList(3, 4));
 		studentWithCollections.setSubjects(newHashSet("Phisics, Math"));
 
@@ -304,7 +304,7 @@ public class AnnotationDrivenMapperTest {
 	@Test
 	public void shouldMapStudentWithArraysToStudentWithCollections() {
 		// given
-		StudentWithArrays studentWithArrays = new StudentWithArrays();
+		StudentWithArrays studentWithArrays = new StudentWithArrays(null, null);
 		studentWithArrays.setGrades(new Integer[] { 4, 5 });
 		studentWithArrays.setSubjects(new String[] { "Phisics", "Math" });
 

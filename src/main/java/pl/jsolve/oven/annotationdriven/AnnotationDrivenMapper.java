@@ -1,17 +1,17 @@
 package pl.jsolve.oven.annotationdriven;
 
-import static java.util.Collections.synchronizedList;
+import pl.jsolve.oven.annotationdriven.annotation.MappableTo;
+import pl.jsolve.oven.annotationdriven.exception.MappingException;
+import pl.jsolve.sweetener.core.Reflections;
+import pl.jsolve.typeconverter.TypeConverter;
 
+import java.lang.Class;
 import java.lang.reflect.Constructor;
-import java.lang.reflect.InvocationTargetException;
-import java.lang.reflect.Type;
 import java.util.Arrays;
 import java.util.LinkedList;
 import java.util.List;
 
-import pl.jsolve.oven.annotationdriven.annotation.MappableTo;
-import pl.jsolve.oven.annotationdriven.exception.MappingException;
-import pl.jsolve.sweetener.core.Reflections;
+import static java.util.Collections.synchronizedList;
 
 public final class AnnotationDrivenMapper {
 
@@ -33,9 +33,7 @@ public final class AnnotationDrivenMapper {
 
 	public static <T, V> V map(T sourceObject, Class<V> targetClass) {
 		throwExceptionWhenIsNotMappableToTargetClass(sourceObject, targetClass);
-		//TODO: process case when targetClass has no default constructoir
-		//V targetObject = Reflections.tryToCreateNewInstance(targetClass);
-		V targetObject = createAnInstance(targetClass);
+		V targetObject = tryToCreateNewInstance(targetClass);
 		applyAllMappings(sourceObject, targetObject);
 		return targetObject;
 	}
@@ -62,56 +60,33 @@ public final class AnnotationDrivenMapper {
 		}
 	}
 
-	private static <T> T createAnInstance(java.lang.Class<T> clazz){
-		Constructor[] allConstructors = clazz.getDeclaredConstructors();
-		for (Constructor constructor : allConstructors) {
-			Class<?>[] types  = constructor.getParameterTypes();
-
-			if(types.length == 0){
+	private static <T> T tryToCreateNewInstance(Class<T> clazz) {
+		for (Constructor constructor : clazz.getDeclaredConstructors()) {
+			Class<?>[] parameterTypes = constructor.getParameterTypes();
+			if (parameterTypes.length == 0) {
 				return Reflections.tryToCreateNewInstance(clazz);
 			}
-			else{
-				Object[] params = new Object[types.length];
-
-				for (int i = 0; i < types.length; i++) {
-
-					String typeName = types[i].getName();
-
-					if (typeName.equals("byte")||
-							typeName.equals("short")||
-							typeName.equals("int")) {
-						params[i] = 0;
-					}
-					else if (typeName.equals("long")) {
-						params[i] = 0L;
-					}
-					else if (typeName.equals("float")) {
-						params[i] = 0.0;
-					}
-					else if (typeName.equals("double")) {
-						params[i] = 0.0;
-					}
-					else if (typeName.equals("boolean")) {
-						params[i] = true;
-					}
-					else if (typeName.equals("char")) {
-						params[i] = ' ';
-					}
-					else{
-						params[i] = null;
-					}
-				}
-				try {
-					return (T)constructor.newInstance(params);
-				} catch (InstantiationException e) {
-					e.printStackTrace();
-				} catch (IllegalAccessException e) {
-					e.printStackTrace();
-				} catch (InvocationTargetException e) {
-					e.printStackTrace();
+			Object[] params = new Object[parameterTypes.length];
+			for (int i = 0; i < parameterTypes.length; i++) {
+				if (parameterTypes[i].isPrimitive()) {
+					params[i] = TypeConverter.convert(0, parameterTypes[i]);
+				} else {
+					params[i] = null;
 				}
 			}
+			return tryToCreateNewInstance(constructor, params);
 		}
-	return null;
+		throw new IllegalStateException(String.format("Given class %s has no constructors", clazz));
+	}
+
+	private static <T> T tryToCreateNewInstance(Constructor constructor, Object... params) {
+		try {
+			constructor.setAccessible(true);
+			return (T) constructor.newInstance(params);
+		} catch (Exception e) {
+			throw new RuntimeException(e);
+		} finally {
+			constructor.setAccessible(false);
+		}
 	}
 }
