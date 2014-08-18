@@ -9,9 +9,6 @@ public class GradeSnapshot {
 	@Map
 	private int grade;
 
-	public GradeSnapshot() {
-	}
-
 	private GradeSnapshot(int grade) {
 		this.grade = grade;
 	}

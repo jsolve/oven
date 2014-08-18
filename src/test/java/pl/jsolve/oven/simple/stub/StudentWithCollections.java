@@ -14,6 +14,11 @@ public class StudentWithCollections {
 	@Map(elementsAs = String.class)
 	private Set<String> subjects;
 
+	public StudentWithCollections(List<Integer> grades, Set<String> subjects) {
+		this.grades = grades;
+		this.subjects = subjects;
+	}
+
 	public List<Integer> getGrades() {
 		return grades;
 	}

@@ -11,6 +11,11 @@ public class StudentWithArrays {
 	@Map(elementsAs = String.class)
 	private String[] subjects;
 
+	public StudentWithArrays(Integer[] grades, String[] subjects) {
+		this.grades = grades;
+		this.subjects = subjects;
+	}
+
 	public Integer[] getGrades() {
 		return grades;
 	}
