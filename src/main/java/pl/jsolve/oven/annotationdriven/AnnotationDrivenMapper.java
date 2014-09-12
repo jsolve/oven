@@ -5,7 +5,6 @@ import pl.jsolve.oven.annotationdriven.exception.MappingException;
 import pl.jsolve.sweetener.core.Reflections;
 import pl.jsolve.typeconverter.TypeConverter;
 
-import java.lang.Class;
 import java.lang.reflect.Constructor;
 import java.util.Arrays;
 import java.util.LinkedList;
