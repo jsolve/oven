@@ -12,6 +12,7 @@ import java.util.List;
 
 class MapAnnotationMapping implements AnnotationMapping {
 
+	private static final AnnotationProvider ANNOTATION_PROVIDER = new AnnotationProvider();
 	private static final String NESTING_CHARACTER = ".";
 	private static final Class<Map> MAP_ANNOTATION_CLASS = Map.class;
 	private static final Class<Mappings> MAPPINGS_ANNOTATION_CLASS = Mappings.class;
@@ -23,18 +24,18 @@ class MapAnnotationMapping implements AnnotationMapping {
 	}
 
 	private <S, T> void applyOnFieldsAnnotatedByMap(S sourceObject, T targetObject) {
-		List<Field> annotatedfields = Reflections.getFieldsAnnotatedBy(sourceObject, MAP_ANNOTATION_CLASS);
-		for (Field field : annotatedfields) {
-			Map mapAnnotation = field.getAnnotation(MAP_ANNOTATION_CLASS);
-			applyOnFieldWithAnnotation(sourceObject, targetObject, field, mapAnnotation);
+		List<AnnotatedField> annotatedfields = ANNOTATION_PROVIDER.getFieldsAnnotatedBy(sourceObject, MAP_ANNOTATION_CLASS);
+		for (AnnotatedField field : annotatedfields) {
+			Map mapAnnotation = (Map) field.getAnnotation();
+			applyOnFieldWithAnnotation(sourceObject, targetObject, field.get(), mapAnnotation);
 		}
 	}
 
 	private <S, T> void applyOnFieldsAnnotatedByMappings(S sourceObject, T targetObject) {
-		List<Field> annotatedfields = Reflections.getFieldsAnnotatedBy(sourceObject, MAPPINGS_ANNOTATION_CLASS);
-		for (Field field : annotatedfields) {
-			Map[] mapAnntoations = field.getAnnotation(MAPPINGS_ANNOTATION_CLASS).value();
-			applyOnFieldWithAnnotations(sourceObject, targetObject, field, mapAnntoations);
+		List<AnnotatedField> annotatedfields = ANNOTATION_PROVIDER.getFieldsAnnotatedBy(sourceObject, MAPPINGS_ANNOTATION_CLASS);
+		for (AnnotatedField field : annotatedfields) {
+			Map[] mapAnnotoations = ((Mappings) field.getAnnotation()).value();
+			applyOnFieldWithAnnotations(sourceObject, targetObject, field.get(), mapAnnotoations);
 		}
 	}
 

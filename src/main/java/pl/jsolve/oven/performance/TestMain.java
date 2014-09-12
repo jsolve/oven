@@ -3,8 +3,10 @@ package pl.jsolve.oven.performance;
 import com.google.common.base.Stopwatch;
 import org.dozer.DozerBeanMapper;
 import org.dozer.Mapper;
+import pl.jsolve.oven.annotationdriven.AnnotationDrivenMapper;
 import pl.jsolve.oven.performance.dozer.DozerClass;
 import pl.jsolve.oven.performance.dto.ClassDto;
+import pl.jsolve.oven.performance.mapper.MapperClass;
 
 import java.io.BufferedReader;
 import java.io.IOException;
@@ -26,6 +28,14 @@ public class TestMain {
 		System.out.println("Start mapping ? ");
 		br.readLine();
 
+		System.out.println("MAPPER ...");
+		Stopwatch mapperStopwatch = Stopwatch.createStarted();
+		MapperClass map = AnnotationDrivenMapper.map(clazz, MapperClass.class);
+		// System.out.println(map);
+		mapperStopwatch.stop();
+		System.out.println("TIME: " + mapperStopwatch.elapsed(TimeUnit.MILLISECONDS) + " ms");
+
+
 		System.out.println("DOZER ...");
 		Stopwatch dozerStopwatch = Stopwatch.createStarted();
 		Mapper mapper = new DozerBeanMapper();
@@ -34,16 +44,8 @@ public class TestMain {
 		dozerStopwatch.stop();
 		System.out.println("TIME: " + dozerStopwatch.elapsed(TimeUnit.MILLISECONDS) + " ms");
 
-//		System.out.println("MAPPER ...");
-//		Stopwatch mapperStopwatch = Stopwatch.createStarted();
-//		MapperClass map = AnnotationDrivenMapper.map(clazz, MapperClass.class);
-//		// System.out.println(map);
-//		mapperStopwatch.stop();
-//		System.out.println("TIME: " + mapperStopwatch.elapsed(TimeUnit.MILLISECONDS) + " ms");
-
-
-		System.out.println("Exit ? ");
+		System.out.println("EXIT?");
 		br.readLine();
-	}
 
+	}
 }
