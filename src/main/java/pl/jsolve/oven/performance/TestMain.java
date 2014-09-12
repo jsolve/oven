@@ -35,7 +35,6 @@ public class TestMain {
 		mapperStopwatch.stop();
 		System.out.println("TIME: " + mapperStopwatch.elapsed(TimeUnit.MILLISECONDS) + " ms");
 
-
 		System.out.println("DOZER ...");
 		Stopwatch dozerStopwatch = Stopwatch.createStarted();
 		Mapper mapper = new DozerBeanMapper();

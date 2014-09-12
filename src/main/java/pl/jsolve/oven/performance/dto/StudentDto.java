@@ -3,6 +3,7 @@ package pl.jsolve.oven.performance.dto;
 import org.dozer.Mapping;
 import pl.jsolve.oven.annotationdriven.annotation.Map;
 import pl.jsolve.oven.annotationdriven.annotation.MappableTo;
+import pl.jsolve.oven.performance.dozer.Subject;
 import pl.jsolve.oven.performance.mapper.Student;
 
 import java.util.List;
@@ -23,8 +24,8 @@ public class StudentDto {
 	@Map(to = "semester")
 	private int semester;
 
-//	@Mapping("subjects")
-//	@Map(to = "subjects", elementsAs = Subject.class)
+	@Mapping("subjects")
+	@Map(to = "subjects", elementsAs = Subject.class)
 	private List<SubjectDto> subjects;
 
 	public String getName() {

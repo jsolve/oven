@@ -24,18 +24,18 @@ class MapAnnotationMapping implements AnnotationMapping {
 	}
 
 	private <S, T> void applyOnFieldsAnnotatedByMap(S sourceObject, T targetObject) {
-		List<AnnotatedField> annotatedfields = ANNOTATION_PROVIDER.getFieldsAnnotatedBy(sourceObject, MAP_ANNOTATION_CLASS);
-		for (AnnotatedField field : annotatedfields) {
+		List<AnnotatedField> annotatedFields = ANNOTATION_PROVIDER.getFieldsAnnotatedBy(sourceObject, MAP_ANNOTATION_CLASS);
+		for (AnnotatedField field : annotatedFields) {
 			Map mapAnnotation = (Map) field.getAnnotation();
 			applyOnFieldWithAnnotation(sourceObject, targetObject, field.get(), mapAnnotation);
 		}
 	}
 
 	private <S, T> void applyOnFieldsAnnotatedByMappings(S sourceObject, T targetObject) {
-		List<AnnotatedField> annotatedfields = ANNOTATION_PROVIDER.getFieldsAnnotatedBy(sourceObject, MAPPINGS_ANNOTATION_CLASS);
-		for (AnnotatedField field : annotatedfields) {
-			Map[] mapAnnotoations = ((Mappings) field.getAnnotation()).value();
-			applyOnFieldWithAnnotations(sourceObject, targetObject, field.get(), mapAnnotoations);
+		List<AnnotatedField> annotatedFields = ANNOTATION_PROVIDER.getFieldsAnnotatedBy(sourceObject, MAPPINGS_ANNOTATION_CLASS);
+		for (AnnotatedField field : annotatedFields) {
+			Map[] mapAnnotations = ((Mappings) field.getAnnotation()).value();
+			applyOnFieldWithAnnotations(sourceObject, targetObject, field.get(), mapAnnotations);
 		}
 	}
 
