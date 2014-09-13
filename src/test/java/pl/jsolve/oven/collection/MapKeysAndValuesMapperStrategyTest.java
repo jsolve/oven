@@ -21,7 +21,7 @@ public class MapKeysAndValuesMapperStrategyTest {
 
 	@Test
 	@Parameters(method = "differentMapImplementations")
-	public void shouldMapReturningHashMap(Map<Integer, Grade> mapOfGrades) {
+	public void shouldMapReturningSameMap(Map<Integer, Grade> mapOfGrades) {
 		// given
 		MapKeysAndValuesMapperStrategy mapKeysAndValuesMapperStrategy =
 				new MapKeysAndValuesMapperStrategy(Integer.class, GradeSnapshot.class);
@@ -29,7 +29,7 @@ public class MapKeysAndValuesMapperStrategyTest {
 		mapOfGrades.put(4, Grade.valueOf(4));
 
 		// when
-		Object result = mapKeysAndValuesMapperStrategy.apply(mapOfGrades, GradeSnapshot.class);
+		Object result = mapKeysAndValuesMapperStrategy.apply(mapOfGrades, Map.class);
 
 		// then
 		assertThat(result).isInstanceOf(mapOfGrades.getClass());
