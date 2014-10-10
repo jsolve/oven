@@ -1,3 +1,6 @@
+[![Build Status](https://travis-ci.org/jsolve/oven.svg?branch=master)](https://travis-ci.org/jsolve/oven)
+[![Coverage Status](https://coveralls.io/repos/jsolve/oven/badge.png)](https://coveralls.io/r/jsolve/oven)
+
 The recommended way to get started using oven in your project is with a dependency management system – the snippet below can be copied and pasted into your build.
 ``` xml
 (...)
