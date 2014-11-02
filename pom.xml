@@ -42,6 +42,7 @@
 		<fest-assert.version>1.4</fest-assert.version>
 		<mockito-core.version>1.9.5</mockito-core.version>
 		<junit.version>4.10</junit.version>
+		<junitparams.version>1.0.3</junitparams.version>
 	</properties>
 
 	<repositories>
@@ -75,6 +76,12 @@
 			<groupId>org.mockito</groupId>
 			<artifactId>mockito-core</artifactId>
 			<version>${mockito-core.version}</version>
+			<scope>test</scope>
+		</dependency>
+		<dependency>
+			<groupId>pl.pragmatists</groupId>
+			<artifactId>JUnitParams</artifactId>
+			<version>${junitparams.version}</version>
 			<scope>test</scope>
 		</dependency>
 		<dependency>
