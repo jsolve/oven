@@ -8,7 +8,6 @@ The recommended way to get started using oven in your project is with a dependen
 	<artifactId>oven</artifactId>
   <version>1.0.0</version>
 </dependency>
-(...)
 ```
 
 ---
