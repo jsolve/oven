@@ -3,17 +3,10 @@
 
 The recommended way to get started using oven in your project is with a dependency management system – the snippet below can be copied and pasted into your build.
 ``` xml
-(...)
-<repository>
-	<id>jsolve-repo</id>
-	<name>Jsolve Maven Repository</name>
-	<url>http://maven.jsolve.pl/</url>
-</repository>
-(...)
 <dependency>
 	<groupId>pl.jsolve</groupId>
 	<artifactId>oven</artifactId>
-  <version>0.0.1-SNAPSHOT</version>
+  <version>1.0.0</version>
 </dependency>
 (...)
 ```
