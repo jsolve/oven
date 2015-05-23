@@ -6,7 +6,7 @@ The recommended way to get started using oven in your project is with a dependen
 <dependency>
 	<groupId>pl.jsolve</groupId>
 	<artifactId>oven</artifactId>
-  <version>1.0.0</version>
+  <version>1.0.1</version>
 </dependency>
 ```
 
