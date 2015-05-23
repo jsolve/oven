@@ -3,7 +3,7 @@
 	<modelVersion>4.0.0</modelVersion>
 	<groupId>pl.jsolve</groupId>
 	<artifactId>oven</artifactId>
-	<version>1.0.1-SHAPSHOT</version>
+	<version>1.0.2-SNAPSHOT</version>
 	<name>oven</name>
 	<description>Pretty neat and fast mapper.</description>
 	<url>https://github.com/jsolve/oven</url>
@@ -42,8 +42,8 @@
 		<maven-compiler-plugin.version>3.0</maven-compiler-plugin.version>
 		<maven-jar-plugin.version>2.4</maven-jar-plugin.version>
 		<wagon-ftp.version>2.4</wagon-ftp.version>
-		<typeconverter.version>1.0.0-SNAPSHOT</typeconverter.version>
-		<sweetener.version>1.0.0-SNAPSHOT</sweetener.version>
+		<typeconverter.version>1.0.0</typeconverter.version>
+		<sweetener.version>1.0.0</sweetener.version>
 
 		<jackson-mapper-asl.version>1.9.12</jackson-mapper-asl.version>
 		<fest-assert.version>1.4</fest-assert.version>
