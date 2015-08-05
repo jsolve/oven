@@ -1,6 +1,8 @@
 package pl.jsolve.oven.annotationdriven;
 
+import pl.jsolve.oven.annotationdriven.annotation.Alias;
 import pl.jsolve.oven.annotationdriven.annotation.MappableTo;
+import pl.jsolve.oven.annotationdriven.annotation.MappableToAlias;
 import pl.jsolve.oven.annotationdriven.exception.MappingException;
 import pl.jsolve.sweetener.core.Reflections;
 import pl.jsolve.typeconverter.TypeConverter;
@@ -50,7 +52,13 @@ public final class AnnotationDrivenMapper {
 			return false;
 		}
 		MappableTo mappableTo = object.getClass().getAnnotation(MappableTo.class);
-		return mappableTo != null && Arrays.asList(mappableTo.value()).contains(targetClass);
+		MappableToAlias mappableToAlias = object.getClass().getAnnotation(MappableToAlias.class);
+
+		boolean mappable =
+				mappableToAlias != null && Arrays.asList(mappableToAlias.value()).contains(targetClass.getAnnotation(Alias.class).value());
+		mappable = mappable || (mappableTo != null && Arrays.asList(mappableTo.value()).contains(targetClass)) ;
+
+		return mappable;
 	}
 
 	private static <V, T> void applyAllMappings(T sourceObject, V targetObject) {

@@ -5,10 +5,7 @@ import pl.jsolve.oven.annotationdriven.AnnotationDrivenMapper;
 import pl.jsolve.oven.annotationdriven.AnnotationMapping;
 import pl.jsolve.oven.annotationdriven.exception.MappingException;
 import pl.jsolve.oven.simple.stub.*;
-import pl.jsolve.oven.stub.hero.Hero;
-import pl.jsolve.oven.stub.hero.HeroBuilder;
-import pl.jsolve.oven.stub.hero.HeroDTO;
-import pl.jsolve.oven.stub.hero.HeroSnapshot;
+import pl.jsolve.oven.stub.hero.*;
 import pl.jsolve.oven.stub.person.Address;
 import pl.jsolve.oven.stub.person.City;
 import pl.jsolve.oven.stub.person.FieldOfStudy;
@@ -25,7 +22,7 @@ import static org.fest.assertions.Assertions.assertThat;
 import static pl.jsolve.oven.simple.stub.StudentWithBadlyAnnotatedFromNestedField.NOT_EXISTING_NESTED_FIELD;
 import static pl.jsolve.oven.simple.stub.StudentWithBadlyAnnotatedMapTo.NOT_EXISTING_FIELD;
 import static pl.jsolve.oven.simple.stub.StudentWithMapParsingIntToAnnotationMapping.MAP_PARSING_INT_TO_ANNOTATION_CLASS;
-import static pl.jsolve.oven.stub.hero.HeroBuilder.aHero;
+import static pl.jsolve.oven.stub.hero.HeroWithAliasesBuilder.aHero;
 import static pl.jsolve.sweetener.collection.Collections.newArrayList;
 import static pl.jsolve.sweetener.collection.Collections.newHashSet;
 import static pl.jsolve.sweetener.tests.assertion.ThrowableAssertions.assertThrowable;
@@ -52,7 +49,7 @@ public class AnnotationDrivenMapperTest {
 	@Test
 	public void shouldMapHeroWithNullFieldsToHeroSnapshot() {
 		// given
-		Hero hero = aHero().build();
+		Hero hero = HeroBuilder.aHero().build();
 
 		// when
 		HeroSnapshot result = AnnotationDrivenMapper.map(hero, HeroSnapshot.class);
@@ -65,7 +62,7 @@ public class AnnotationDrivenMapperTest {
 	@Test
 	public void shouldMapHeroToHeroDTO() {
 		// given
-		Hero hero = aHero().withId(ID).withNickname(NICKNAME).build();
+		Hero hero = HeroBuilder.aHero().withId(ID).withNickname(NICKNAME).build();
 
 		// when
 		HeroDTO result = AnnotationDrivenMapper.map(hero, HeroDTO.class);
@@ -92,19 +89,74 @@ public class AnnotationDrivenMapperTest {
 	}
 
 	@Test
+	public void shouldMapHeroWithAliasToHeroSnapshotWithAlias() {
+		// given
+		HeroWithAlias heroWithAlias = HeroWithAliasesBuilder.aHero().withId(ID).withNickname(NICKNAME).build();
+
+		// when
+		HeroSnapshotWithAlias result = AnnotationDrivenMapper.map(heroWithAlias, HeroSnapshotWithAlias.class);
+
+		// then
+		assertThat(result.getId()).isEqualTo(heroWithAlias.getId());
+		assertThat(result.getName()).isEqualTo(heroWithAlias.getNickname());
+	}
+
+	@Test
+	public void shouldMapHeroWithAliasAndNullFieldsToHeroSnapshotWithAlias() {
+		// given
+		HeroWithAlias heroWithAlias = HeroWithAliasesBuilder.aHero().build();
+
+		// when
+		HeroSnapshotWithAlias result = AnnotationDrivenMapper.map(heroWithAlias, HeroSnapshotWithAlias.class);
+
+		// then
+		assertThat(result.getId()).isNull();
+		assertThat(result.getName()).isNull();
+	}
+
+	@Test
+	public void shouldMapHeroWithAliasToHeroDTOWithAlias() {
+		// given
+		HeroWithAlias heroWithAlias = HeroWithAliasesBuilder.aHero().withId(ID).withNickname(NICKNAME).build();
+
+		// when
+		HeroDTOWithAlias result = AnnotationDrivenMapper.map(heroWithAlias, HeroDTOWithAlias.class);
+
+		// then
+		assertThat(result.getId()).isEqualTo(heroWithAlias.getId());
+		assertThat(result.getNickname()).isEqualTo(heroWithAlias.getNickname());
+	}
+
+	@Test
+	public void shouldMapHeroWithAliasSnapshotToHeroWithAlias() {
+		// given
+		HeroSnapshotWithAlias heroSnapshotWithAlias = new HeroSnapshotWithAlias();
+		heroSnapshotWithAlias.setId(ID);
+
+		// when
+		HeroWithAlias result = AnnotationDrivenMapper.map(heroSnapshotWithAlias, HeroWithAlias.class);
+
+		// then
+		assertThat(result.getId()).isEqualTo(heroSnapshotWithAlias.getId());
+		assertThat(result.getFirstName()).as("firstName field is not annotated for mapping").isNull();
+		assertThat(result.getLastName()).as("lastName field is not annotated for mapping").isNull();
+		assertThat(result.getNickname()).as("nickanme field is not annotated for mapping").isNull();
+	}
+
+	@Test
 	public void shouldThrowExceptionWhenMappingToUnmappableObject() {
 		// when
 		MappingException caughtException = tryToCatch(MappingException.class, new ExceptionalOperation() {
 
 			@Override
 			public void operate() throws Exception {
-				AnnotationDrivenMapper.map(new Hero(), Person.class);
+				AnnotationDrivenMapper.map(new HeroWithAlias(), Person.class);
 			}
 		});
 
 		// then
 		assertThrowable(caughtException).withMessageContaining(
-				Hero.class + " is not mappable to " + Person.class).isThrown();
+				HeroWithAlias.class + " is not mappable to " + Person.class).isThrown();
 	}
 
 	@Test
