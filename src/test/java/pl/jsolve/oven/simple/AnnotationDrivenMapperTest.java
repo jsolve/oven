@@ -144,7 +144,7 @@ public class AnnotationDrivenMapperTest {
 	}
 
 	@Test
-	public void shouldThrowExceptionWhenMappingToUnmappableObject() {
+	public void shouldThrowExceptionWhenMappingToAliasUnmappableObjectWhitWrongAlias() {
 		// when
 		MappingException caughtException = tryToCatch(MappingException.class, new ExceptionalOperation() {
 
@@ -157,6 +157,38 @@ public class AnnotationDrivenMapperTest {
 		// then
 		assertThrowable(caughtException).withMessageContaining(
 				HeroWithAlias.class + " is not mappable to " + Person.class).isThrown();
+	}
+
+	@Test
+	public void shouldThrowExceptionWhenMappingToAliasUnmappableObjectWhitoutAnyAlias() {
+		// when
+		MappingException caughtException = tryToCatch(MappingException.class, new ExceptionalOperation() {
+
+			@Override
+			public void operate() throws Exception {
+				AnnotationDrivenMapper.map(new HeroWithAlias(), Student.class);
+			}
+		});
+
+		// then
+		assertThrowable(caughtException).withMessageContaining(
+				HeroWithAlias.class + " is not mappable to " + Student.class).isThrown();
+	}
+
+	@Test
+	public void shouldThrowExceptionWhenMappingToUnmappableObject() {
+		// when
+		MappingException caughtException = tryToCatch(MappingException.class, new ExceptionalOperation() {
+
+			@Override
+			public void operate() throws Exception {
+				AnnotationDrivenMapper.map(new Hero(), Student.class);
+			}
+		});
+
+		// then
+		assertThrowable(caughtException).withMessageContaining(
+				Hero.class + " is not mappable to " + Student.class).isThrown();
 	}
 
 	@Test

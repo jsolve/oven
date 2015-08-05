@@ -54,8 +54,10 @@ public final class AnnotationDrivenMapper {
 		MappableTo mappableTo = object.getClass().getAnnotation(MappableTo.class);
 		MappableToAlias mappableToAlias = object.getClass().getAnnotation(MappableToAlias.class);
 
-		boolean mappable =
-				mappableToAlias != null && Arrays.asList(mappableToAlias.value()).contains(targetClass.getAnnotation(Alias.class).value());
+		boolean mappable =	mappableToAlias != null &&
+				targetClass.getAnnotation(Alias.class) != null &&
+				Arrays.asList(mappableToAlias.value()).contains(targetClass.getAnnotation(Alias.class).value());
+
 		mappable = mappable || (mappableTo != null && Arrays.asList(mappableTo.value()).contains(targetClass)) ;
 
 		return mappable;
