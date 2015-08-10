@@ -73,6 +73,19 @@ public class AnnotationDrivenMapperTest {
 	}
 
 	@Test
+	public void shouldMapHeroSecondToHeroDTO() {
+		// given
+		HeroSecond hero = HeroSecondBuilder.aHero().withId(ID).withNickname(NICKNAME).build();
+
+		// when
+		HeroDTO result = AnnotationDrivenMapper.map(hero, HeroDTO.class);
+
+		// then
+		assertThat(result.getId()).isEqualTo(hero.getId());
+		assertThat(result.getNickname()).isEqualTo(hero.getNickname());
+	}
+
+	@Test
 	public void shouldMapHeroSnapshotToHero() {
 		// given
 		HeroSnapshot heroSnapshot = new HeroSnapshot();
@@ -389,8 +402,8 @@ public class AnnotationDrivenMapperTest {
 	public void shouldMapStudentWithArraysToStudentWithCollections() {
 		// given
 		StudentWithArrays studentWithArrays = new StudentWithArrays(null, null);
-		studentWithArrays.setGrades(new Integer[] { 4, 5 });
-		studentWithArrays.setSubjects(new String[] { "Phisics", "Math" });
+		studentWithArrays.setGrades(new Integer[]{4, 5});
+		studentWithArrays.setSubjects(new String[]{"Phisics", "Math"});
 
 		// when
 		StudentWithCollections studentWithCollections = AnnotationDrivenMapper.map(studentWithArrays, StudentWithCollections.class);

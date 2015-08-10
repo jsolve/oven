@@ -7,13 +7,13 @@ import java.lang.annotation.Target;
 
 @Retention(RetentionPolicy.RUNTIME)
 @Target(ElementType.FIELD)
-public @interface Map  {
+public @interface MapToAlias {
 
 	String fromNested() default "";
 
 	String to() default "";
 
-	Class<?>[] of() default Object.class;
+	String[] of() default "";
 
 	Class<?> keysAs() default Object.class;
 

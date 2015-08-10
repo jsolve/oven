@@ -3,23 +3,22 @@ package pl.jsolve.oven.stub.hero;
 import pl.jsolve.oven.annotationdriven.annotation.*;
 
 
-@MappableTo({HeroSnapshot.class, HeroDTO.class})
-public class Hero {
+@MappableTo(HeroSnapshot.class)
+@MappableToAlias("HeroDto")
+public class HeroSecond {
 
 	@Map
 	private Long id;
 	private String firstName;
 	private String lastName;
 
-	@MappingsForAliases({
-			@MapToAlias(to = "nickname", of = "HeroDto")
-	})
 	@Mappings({
-			@Map(to = "name", of = HeroSnapshot.class)
+			@Map(to = "name", of = HeroSnapshot.class),
+			@Map(to = "nickname", of = HeroDTO.class)
 	})
 	private String nickname;
 
-	public Hero() {
+	public HeroSecond() {
 	}
 
 	public Long getId() {

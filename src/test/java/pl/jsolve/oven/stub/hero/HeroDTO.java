@@ -1,5 +1,8 @@
 package pl.jsolve.oven.stub.hero;
 
+import pl.jsolve.oven.annotationdriven.annotation.Alias;
+
+@Alias("HeroDto")
 public class HeroDTO {
 
 	private Long id;
