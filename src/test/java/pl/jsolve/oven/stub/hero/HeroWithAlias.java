@@ -1,25 +1,25 @@
 package pl.jsolve.oven.stub.hero;
 
-import pl.jsolve.oven.annotationdriven.annotation.*;
+import pl.jsolve.oven.annotationdriven.annotation.Alias;
+import pl.jsolve.oven.annotationdriven.annotation.Map;
+import pl.jsolve.oven.annotationdriven.annotation.MappableToAlias;
+import pl.jsolve.oven.annotationdriven.annotation.Mappings;
 
-
-@MappableTo({HeroSnapshot.class, HeroDTO.class})
-public class Hero {
+@Alias("Hero")
+@MappableToAlias({ "HeroSnapshot", "HeroDTO" })
+public class HeroWithAlias {
 
 	@Map
 	private Long id;
 	private String firstName;
 	private String lastName;
-
-	@MappingsForAliases({
-			@MapToAlias(to = "nickname", of = "HeroDto")
-	})
 	@Mappings({
-			@Map(to = "name", of = HeroSnapshot.class)
+		@Map(to = "name", of = HeroSnapshotWithAlias.class),
+		@Map(to = "nickname", of = HeroDTOWithAlias.class),
 	})
 	private String nickname;
 
-	public Hero() {
+	public HeroWithAlias() {
 	}
 
 	public Long getId() {

@@ -1,22 +1,23 @@
-package pl.jsolve.oven.collection.stub;
+package pl.jsolve.oven.stub.hero;
 
 import pl.jsolve.oven.annotationdriven.annotation.Alias;
 import pl.jsolve.oven.annotationdriven.annotation.Map;
-import pl.jsolve.oven.annotationdriven.annotation.MappableTo;
 import pl.jsolve.oven.annotationdriven.annotation.MappableToAlias;
 
-@Alias("ExamSnapshot")
-@MappableToAlias("Exam")
-public class ExamSnapshot {
+@Alias("HeroSnapshot")
+@MappableToAlias("Hero")
+public class HeroSnapshotWithAlias {
 
 	@Map
+	private Long id;
 	private String name;
 
-	public ExamSnapshot() {
+	public Long getId() {
+		return id;
 	}
 
-	public ExamSnapshot(String name) {
-		this.name = name;
+	public void setId(Long id) {
+		this.id = id;
 	}
 
 	public String getName() {

@@ -3,8 +3,8 @@ package pl.jsolve.oven;
 import org.junit.Test;
 import pl.jsolve.oven.complex.ComplexMapper;
 import pl.jsolve.oven.complex.MappingStrategy;
-import pl.jsolve.oven.stub.hero.Hero;
-import pl.jsolve.oven.stub.hero.HeroSnapshot;
+import pl.jsolve.oven.stub.hero.HeroWithAlias;
+import pl.jsolve.oven.stub.hero.HeroSnapshotWithAlias;
 
 import static org.fest.assertions.Assertions.assertThat;
 import static pl.jsolve.oven.stub.hero.HeroProfiledBuilder.aCaptainAmerica;
@@ -18,18 +18,18 @@ public class ComplexMapperTest {
 	@Test
 	public void shouldMapHeroToHeroSnapshot() {
 		// given
-		Hero captainAmerica = aCaptainAmerica().withId(ID).build();
-		ComplexMapper<Hero, HeroSnapshot> heroToHeroSnapshotMapper = new ComplexMapper<Hero, HeroSnapshot>(new MappingStrategy<Hero, HeroSnapshot>() {
+		HeroWithAlias captainAmerica = aCaptainAmerica().withId(ID).build();
+		ComplexMapper<HeroWithAlias, HeroSnapshotWithAlias> heroToHeroSnapshotMapper = new ComplexMapper<HeroWithAlias, HeroSnapshotWithAlias>(new MappingStrategy<HeroWithAlias, HeroSnapshotWithAlias>() {
 
 			@Override
-			public HeroSnapshot map(Hero source, HeroSnapshot target) {
+			public HeroSnapshotWithAlias map(HeroWithAlias source, HeroSnapshotWithAlias target) {
 				target.setName(source.getFirstName() + SPACE + source.getLastName());
 				return target;
 			}
 		});
 
 		// when
-		HeroSnapshot result = heroToHeroSnapshotMapper.map(captainAmerica);
+		HeroSnapshotWithAlias result = heroToHeroSnapshotMapper.map(captainAmerica);
 
 		// then
 		assertThat(result.getId()).as("id field has mapping annotations").isEqualTo(captainAmerica.getId());
@@ -39,16 +39,16 @@ public class ComplexMapperTest {
 	@Test
 	public void shouldMapHeroToHeroSnapshotWithComplexIdMapping() {
 		// given
-		Hero captainAmerica = aCaptainAmerica().withId(ID).build();
-		ComplexMapper<Hero, HeroSnapshot> heroToHeroSnapshotMapper = new ComplexMapper<Hero, HeroSnapshot>(new MappingStrategy<Hero, HeroSnapshot>() {
+		HeroWithAlias captainAmerica = aCaptainAmerica().withId(ID).build();
+		ComplexMapper<HeroWithAlias, HeroSnapshotWithAlias> heroToHeroSnapshotMapper = new ComplexMapper<HeroWithAlias, HeroSnapshotWithAlias>(new MappingStrategy<HeroWithAlias, HeroSnapshotWithAlias>() {
 			@Override
-			public HeroSnapshot map(Hero source, HeroSnapshot target) {
+			public HeroSnapshotWithAlias map(HeroWithAlias source, HeroSnapshotWithAlias target) {
 				target.setId(source.getId() + ANY_NUMBER);
 				return target;
 			}
 		});
 		// when
-		HeroSnapshot result = heroToHeroSnapshotMapper.map(captainAmerica);
+		HeroSnapshotWithAlias result = heroToHeroSnapshotMapper.map(captainAmerica);
 
 		// then
 		assertThat(result.getId()).isEqualTo(captainAmerica.getId() + ANY_NUMBER);
@@ -57,13 +57,13 @@ public class ComplexMapperTest {
 	@Test
 	public void shouldMapHeroSnapshotToHero() {
 		// given
-		HeroSnapshot heroSnapshot = new HeroSnapshot();
-		heroSnapshot.setId(ID);
-		heroSnapshot.setName("Johann Schmidt");
-		ComplexMapper<HeroSnapshot, Hero> heroSnapshotToHeroMapper = new ComplexMapper<HeroSnapshot, Hero>(new MappingStrategy<HeroSnapshot, Hero>() {
+		HeroSnapshotWithAlias heroSnapshotWithAlias = new HeroSnapshotWithAlias();
+		heroSnapshotWithAlias.setId(ID);
+		heroSnapshotWithAlias.setName("Johann Schmidt");
+		ComplexMapper<HeroSnapshotWithAlias, HeroWithAlias> heroSnapshotToHeroMapper = new ComplexMapper<HeroSnapshotWithAlias, HeroWithAlias>(new MappingStrategy<HeroSnapshotWithAlias, HeroWithAlias>() {
 
 			@Override
-			public Hero map(HeroSnapshot source, Hero target) {
+			public HeroWithAlias map(HeroSnapshotWithAlias source, HeroWithAlias target) {
 				target.setFirstName(source.getName().split(SPACE)[0]);
 				target.setLastName(source.getName().split(SPACE)[1]);
 				return target;
@@ -71,10 +71,10 @@ public class ComplexMapperTest {
 		});
 
 		// when
-		Hero result = heroSnapshotToHeroMapper.map(heroSnapshot);
+		HeroWithAlias result = heroSnapshotToHeroMapper.map(heroSnapshotWithAlias);
 
 		// then
-		assertThat(result.getId()).as("id field has mapping annotations").isEqualTo(heroSnapshot.getId());
-		assertThat(result.getFirstName() + SPACE + result.getLastName()).isEqualTo(heroSnapshot.getName());
+		assertThat(result.getId()).as("id field has mapping annotations").isEqualTo(heroSnapshotWithAlias.getId());
+		assertThat(result.getFirstName() + SPACE + result.getLastName()).isEqualTo(heroSnapshotWithAlias.getName());
 	}
 }

@@ -1,8 +1,10 @@
 package pl.jsolve.oven.stub.person;
 
+import pl.jsolve.oven.annotationdriven.annotation.Alias;
 import pl.jsolve.oven.annotationdriven.annotation.Map;
 import pl.jsolve.oven.annotationdriven.annotation.Mappings;
 
+@Alias("WrongAlias")
 public class Person {
 
 	@Map
